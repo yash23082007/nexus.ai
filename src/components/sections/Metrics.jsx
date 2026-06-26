@@ -70,7 +70,7 @@ export function Metrics() {
           <div className="flex flex-col items-center">
             <dd className="h-20 flex items-center justify-center">
               <MetricCounter 
-                target={10000000} 
+                target={10} 
                 suffix="M+" 
                 trigger={hasIntersected} 
               />
