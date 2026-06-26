@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import * as Icons from '../../assets/svgs';
 
-const BentoCard = React.memo(({ feature, onHover, onLeave }) => {
+const BentoCard = React.memo(({ feature, onHover, onLeave, className = '' }) => {
   const cardRef = useRef(null);
   const glowRef = useRef(null);
 
@@ -41,7 +41,7 @@ const BentoCard = React.memo(({ feature, onHover, onLeave }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
-      className={`bento-card bento-card--${feature.size} relative group bg-oceanic/40 border border-white/5 rounded-2xl overflow-hidden backdrop-blur-md transition-all duration-300 hover:border-forsythia/20`}
+      className={`bento-card bento-card--${feature.size} relative group bg-oceanic/40 border border-white/5 rounded-2xl overflow-hidden backdrop-blur-md transition-all duration-300 hover:border-forsythia/20 ${className}`}
     >
       {/* Radial Hover Glow overlay */}
       <div 

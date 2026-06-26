@@ -7,13 +7,22 @@ import AccordionItem from '../ui/AccordionItem';
 
 function BentoGrid({ features, onHover, onLeave, ...props }) {
   return (
-    <div className="bento-grid" role="list" aria-label="Feature cards" {...props}>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6" role="list" aria-label="Feature cards" {...props}>
       {features.map((feature) => (
         <BentoCard
           key={feature.id}
           feature={feature}
           onHover={() => onHover(feature.id)}
           onLeave={onLeave}
+          className={
+            feature.id === 0
+              ? 'md:col-span-2'
+              : feature.id === 1
+                ? 'md:col-span-1'
+                : feature.id === 2
+                  ? 'md:col-span-1'
+                  : 'md:col-span-2'
+          }
         />
       ))}
     </div>
@@ -39,8 +48,8 @@ const Features = () => {
   // Mobile accordion: which panel is open
   const [openAccordionIndex, setOpenAccordionIndex] = useState(null);
 
-  // Desktop bento: which card is being hovered
-  // useRef = no re-render on hover change (critical for performance)
+  // Using useRef and direct DOM mutation keeps hover context out of React state.
+  // React.memo prevents child updates while we preserve the last hovered panel.
   const hoveredBentoIndex = useRef(null);
 
   const isMobile = useBreakpoint();

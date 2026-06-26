@@ -39,6 +39,7 @@ const Pricing = () => {
         refs.amount.style.animation = 'none';
         // Force reflow ONLY on this node
         void refs.amount.offsetHeight;
+        refs.amount.style.animationTimingFunction = 'cubic-bezier(0.16, 1, 0.3, 1)';
         refs.amount.style.animation = 'priceFlip 0.18s ease-out forwards';
         refs.amount.textContent = computePrice(tier.id, currency, billing);
       }

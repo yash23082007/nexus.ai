@@ -24,6 +24,7 @@
   --color-forsythia-20: rgba(255,200,1,0.20);
   --color-saffron-gradient: linear-gradient(135deg, #FFC801 0%, #FF9932 100%);
   --color-dark-gradient: linear-gradient(135deg, #114C5A 0%, #172B36 100%);
+  --motion-spring: cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Typography Scale */
   --font-mono: 'JetBrains Mono', monospace;
@@ -145,6 +146,7 @@ body {
 }
 .card-hover:hover {
   transform: translateY(-4px) scale(1.01);
+  transition-timing-function: var(--motion-spring);
 }
 
 /* CTA button hover */
@@ -154,6 +156,7 @@ body {
 .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(255, 200, 1, 0.35);
+  transition-timing-function: var(--motion-spring);
 }
 .btn-primary:active {
   transform: translateY(0px);
