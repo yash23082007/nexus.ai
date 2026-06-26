@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   NEXUS.AI - Core Design System & Tokens
+   ========================================================================== */
+
+:root {
+  /* Backgrounds */
+  --color-arctic:    #F1F6F4;   /* Page background, light sections */
+  --color-mint:      #D9E8E2;   /* Card backgrounds, subtle fills */
+
+  /* Accents */
+  --color-forsythia: #FFC801;   /* PRIMARY CTA, highlights, active states */
+  --color-saffron:   #FF9932;   /* Secondary accent, gradient partner */
+
+  /* Darks */
+  --color-nocturnal: #114C5A;   /* Primary text, dark section bg */
+  --color-oceanic:   #172B36;   /* Footer bg, deepest dark, nav bg */
+
+  /* Derived (use sparingly) */
+  --color-forsythia-10: rgba(255,200,1,0.10);
+  --color-forsythia-20: rgba(255,200,1,0.20);
+  --color-saffron-gradient: linear-gradient(135deg, #FFC801 0%, #FF9932 100%);
+  --color-dark-gradient: linear-gradient(135deg, #114C5A 0%, #172B36 100%);
+
+  /* Typography Scale */
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Inter', sans-serif;
+
+  /* Scale */
+  --text-xs:   0.75rem;    /* 12px — labels, badges */
+  --text-sm:   0.875rem;   /* 14px — body small */
+  --text-base: 1rem;       /* 16px — body */
+  --text-lg:   1.125rem;   /* 18px — lead text */
+  --text-xl:   1.25rem;    /* 20px — card titles */
+  --text-2xl:  1.5rem;     /* 24px — section subtitles */
+  --text-3xl:  1.875rem;   /* 30px — section titles */
+  --text-4xl:  2.25rem;    /* 36px — hero subtitle */
+  --text-5xl:  3rem;       /* 48px — hero title */
+  --text-6xl:  3.75rem;    /* 60px — hero big number */
+  --text-7xl:  4.5rem;     /* 72px — impact stat */
+}
+
+/* Custom Base Configurations */
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-arctic);
+  color: var(--color-nocturnal);
+}
+
+body {
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-arctic);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-mint);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-nocturnal);
+}
+
+/* Required motion spec */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes priceFlip {
+  0%   { opacity: 0; transform: translateY(-8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Custom Marquee classes */
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 25s linear infinite;
+}
+
+/* Hover micro-interactions — 150-200ms ease-out */
+.card-hover {
+  transition:
+    transform   180ms ease-out,
+    box-shadow  180ms ease-out,
+    background  180ms ease-out;
+}
+.card-hover:hover {
+  transform: translateY(-4px) scale(1.01);
+}
+
+/* CTA button hover */
+.btn-primary {
+  transition: background 180ms ease-out, transform 180ms ease-out, box-shadow 180ms ease-out;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 200, 1, 0.35);
+}
+.btn-primary:active {
+  transform: translateY(0px);
+  transition-duration: 80ms;
+}
+
+/* Layout reflows — 300-400ms ease-in-out */
+.layout-transition {
+  transition: all 350ms ease-in-out;
+}
+
+/* Chevron rotation — pure CSS */
+.accordion-chevron {
+  transition: transform 200ms ease-out;
+}
+.accordion-chevron--open {
+  transform: rotate(180deg);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration:   0.01ms !important;
+    transition-duration:  0.01ms !important;
+  }
+}

@@ -1,0 +1,47 @@
+// src/data/featuresData.js
+export const FEATURES_DATA = [
+  {
+    id: 0,
+    icon: 'IconCog',
+    title: 'AI Automation Engine',
+    subtitle: 'Intelligent task orchestration',
+    description: 'Deploy complex multi-step workflows with our AI engine that learns from your data patterns and self-optimizes in real-time. Handles 10M+ tasks daily with sub-50ms latency.',
+    size: 'large',  // Bento: spans 2 columns
+    accentColor: '#FFC801',
+    metric: '10M+',
+    metricLabel: 'tasks/day',
+  },
+  {
+    id: 1,
+    icon: 'IconLink',
+    title: 'Integration Hub',
+    subtitle: '2,400+ connectors ready',
+    description: 'Connect to every tool your team already uses. Native connectors for Salesforce, Slack, HubSpot, Stripe, and 2,400+ more. Zero code required.',
+    size: 'small',
+    accentColor: '#FF9932',
+    metric: '2,400+',
+    metricLabel: 'integrations',
+  },
+  {
+    id: 2,
+    icon: 'IconArrowTrendingUp',
+    title: 'Smart Routing',
+    subtitle: 'Logic-driven path optimization',
+    description: 'Dynamic if/else branching, priority queues, and conditional routing that adapts to real-time signals. Never lose a task to a failed pipeline again.',
+    size: 'small',
+    accentColor: '#114C5A',
+    metric: '99.9%',
+    metricLabel: 'delivery rate',
+  },
+  {
+    id: 3,
+    icon: 'IconChartPie',
+    title: 'Analytics Dashboard',
+    subtitle: 'Real-time performance insights',
+    description: 'Unified observability across all workflows. Live metrics, error tracking, latency heatmaps, and cost attribution — all in one beautiful dashboard.',
+    size: 'large',
+    accentColor: '#D9E8E2',
+    metric: '<50ms',
+    metricLabel: 'avg. latency',
+  },
+];
