@@ -61,14 +61,19 @@ export const PRICING_MATRIX = {
   ],
 };
 
-export const computePrice = (tier, currency, isAnnual) => {
+export const computePrice = (tier, currency, billing) => {
   const base = PRICING_MATRIX.baseTiers[tier].basePrice;
   const tariff = PRICING_MATRIX.tariffs[currency];
-  const multiplier = isAnnual ? PRICING_MATRIX.annualDiscount : 1;
+  const multiplier = billing === 'annual' ? PRICING_MATRIX.annualDiscount : 1;
   const rawPrice = base * tariff.rate * multiplier;
-  const rounded = Math.round(rawPrice / 10) * 10;
+
+  // Round to nearest 10 for INR, keep 2 significant digits for USD/EUR
+  const rounded = currency === 'INR'
+    ? Math.round(rawPrice / 10) * 10
+    : Math.round(rawPrice);
 
   return new Intl.NumberFormat(tariff.locale, { maximumFractionDigits: 0 }).format(rounded);
 };
 
-export const getCurrencySymbol = (currency) => PRICING_MATRIX.tariffs[currency].symbol;
+export const getCurrencySymbol = (currency) => PRICING_MATRIX.tariffs[currency]?.symbol ?? '$';
+
