@@ -24,73 +24,18 @@ export function Hero() {
 
   // WAAPI orchestrated entry sequence animations
   useEffect(() => {
-    // Title animate
-    const title = document.querySelector('.hero-title');
-    if (title) {
-      title.animate([
-        { opacity: 0, transform: 'translateY(24px)' },
+    const elements = document.querySelectorAll('.hero-stagger');
+    elements.forEach((el, index) => {
+      el.animate([
+        { opacity: 0, transform: 'translateY(20px)' },
         { opacity: 1, transform: 'translateY(0)' }
       ], {
-        duration: 600,
+        duration: 200,
+        delay: index * 100,
         easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
         fill: 'forwards'
       });
-    }
-
-    // Subtitle / description animate
-    const desc = document.querySelector('.hero-desc');
-    if (desc) {
-      desc.animate([
-        { opacity: 0, transform: 'translateY(16px)' },
-        { opacity: 1, transform: 'translateY(0)' }
-      ], {
-        duration: 600,
-        delay: 150,
-        easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
-        fill: 'forwards'
-      });
-    }
-
-    // CTA buttons animate
-    const ctas = document.querySelector('.hero-ctas');
-    if (ctas) {
-      ctas.animate([
-        { opacity: 0, transform: 'translateY(12px)' },
-        { opacity: 1, transform: 'translateY(0)' }
-      ], {
-        duration: 600,
-        delay: 300,
-        easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
-        fill: 'forwards'
-      });
-    }
-
-    // Mockup frame entry animate
-    const mockup = document.querySelector('.hero-mockup');
-    if (mockup) {
-      mockup.animate([
-        { opacity: 0, transform: 'translateY(32px) scale(0.96)' },
-        { opacity: 1, transform: 'translateY(0) scale(1)' }
-      ], {
-        duration: 800,
-        delay: 200,
-        easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
-        fill: 'forwards'
-      });
-    }
-
-    // Stats row fade in
-    const stats = document.querySelector('.hero-stats');
-    if (stats) {
-      stats.animate([
-        { opacity: 0 },
-        { opacity: 1 }
-      ], {
-        duration: 800,
-        delay: 450,
-        fill: 'forwards'
-      });
-    }
+    });
   }, []);
 
   // Trigger demo route logic
@@ -155,23 +100,23 @@ export function Hero() {
         
         {/* Content Box */}
         <div className="lg:col-span-6 text-left flex flex-col justify-center">
-          <div className="mb-6 opacity-0 hero-title">
+          <div className="mb-6 opacity-0 hero-stagger">
             <Badge>
               <span className="w-1.5 h-1.5 rounded-full bg-forsythia animate-pulse mr-2" />
               Now in Public Beta <span className="mx-1.5 text-slate-400">→</span> <span className="text-white font-bold">Live</span>
             </Badge>
           </div>
 
-          <h1 className="opacity-0 hero-title font-mono text-4xl sm:text-5xl lg:text-[3.25rem] font-bold text-white tracking-tight leading-[1.1] mb-6">
+          <h1 className="opacity-0 hero-stagger font-mono text-4xl sm:text-5xl lg:text-[3.25rem] font-bold text-white tracking-tight leading-[1.1] mb-6">
             Automate Everything.<br />
             <span className="bg-saffron-gradient bg-clip-text text-transparent">Intelligently.</span>
           </h1>
 
-          <p className="opacity-0 hero-desc text-lg text-slate-300 font-sans leading-relaxed max-w-xl mb-8">
+          <p className="opacity-0 hero-stagger text-lg text-slate-300 font-sans leading-relaxed max-w-xl mb-8">
             The AI automation platform that connects your data pipelines, workflows, and decisions. Instantly triggers events and routes payloads with enterprise-grade reliability.
           </p>
 
-          <div className="opacity-0 hero-ctas flex flex-wrap items-center gap-4 mb-12">
+          <div className="opacity-0 hero-stagger flex flex-wrap items-center gap-4 mb-12">
             <a 
               href="#pricing" 
               onClick={handleGetStartedClick}
@@ -195,7 +140,7 @@ export function Hero() {
           </div>
 
           {/* Stats Bar */}
-          <div className="opacity-0 hero-stats flex items-center gap-8 border-t border-white/5 pt-8 max-w-md">
+          <div className="opacity-0 hero-stagger flex items-center gap-8 border-t border-white/5 pt-8 max-w-md">
             <div>
               <div className="font-mono text-2xl font-bold text-white leading-none">99.9%</div>
               <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">uptime SLA</div>

@@ -32,6 +32,14 @@ const BentoCard = React.memo(({ feature, onHover, onLeave, className = '' }) => 
 
   // Dynamically resolve Icon component from bundle
   const IconComponent = Icons[feature.icon] || (() => null);
+  const spanClass =
+    feature.id === 0
+      ? 'md:col-span-2'
+      : feature.id === 1
+        ? 'md:col-span-1'
+        : feature.id === 2
+          ? 'md:col-span-1'
+          : 'md:col-span-2';
 
   return (
     <article
@@ -41,7 +49,7 @@ const BentoCard = React.memo(({ feature, onHover, onLeave, className = '' }) => 
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
-      className={`bento-card bento-card--${feature.size} relative group bg-oceanic/40 border border-white/5 rounded-2xl overflow-hidden backdrop-blur-md transition-all duration-300 hover:border-forsythia/20 ${className}`}
+      className={`bento-card bento-card--${feature.size} relative group bg-oceanic/40 border border-white/5 rounded-2xl overflow-hidden backdrop-blur-md transition-all duration-300 hover:border-forsythia/20 ${spanClass} ${className}`}
     >
       {/* Radial Hover Glow overlay */}
       <div 

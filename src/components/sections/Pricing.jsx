@@ -1,6 +1,6 @@
 // src/components/sections/Pricing.jsx
 import React, { useRef, useCallback, useEffect } from 'react';
-import { PRICING_CONFIG, computePrice, getCurrencySymbol } from '../../data/pricingMatrix';
+import { PRICING_MATRIX, computePrice, getCurrencySymbol } from '../../data/pricingMatrix';
 import BillingToggle from '../ui/BillingToggle';
 import CurrencySelector from '../ui/CurrencySelector';
 import PricingCard from '../ui/PricingCard';
@@ -25,7 +25,7 @@ const Pricing = () => {
     const currency = currencyRef.current;
     const symbol = getCurrencySymbol(currency);
 
-    PRICING_CONFIG.tiers.forEach(tier => {
+    PRICING_MATRIX.tiers.forEach(tier => {
       const refs = priceRefs.current[tier.id];
       if (!refs) return;
 
@@ -101,7 +101,7 @@ const Pricing = () => {
           aria-label="Pricing tiers"
           className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch"
         >
-          {PRICING_CONFIG.tiers.map(tier => (
+          {PRICING_MATRIX.tiers.map(tier => (
             <PricingCard
               key={tier.id}
               tier={tier}

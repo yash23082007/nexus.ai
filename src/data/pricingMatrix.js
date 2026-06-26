@@ -1,25 +1,18 @@
 // src/data/pricingMatrix.js
-// THIS IS THE ONLY SOURCE OF TRUTH FOR PRICES — NEVER HARDCODE IN JSX
+// This is the single source of truth for pricing math and display metadata.
 
-export const PRICING_CONFIG = {
-  // Base monthly rates in USD
-  basePrices: {
-    starter:      29,
-    professional: 79,
-    enterprise:   189,
+export const PRICING_MATRIX = {
+  annualDiscount: 0.8,
+  tariffs: {
+    USD: { symbol: '$', rate: 1, locale: 'en-US' },
+    INR: { symbol: '₹', rate: 83.5, locale: 'en-IN' },
+    EUR: { symbol: '€', rate: 0.92, locale: 'de-DE' },
   },
-
-  // Annual multiplier (20% discount)
-  annualMultiplier: 0.80,
-
-  // Regional tariff variables (multiplied against USD base)
-  currencyTariffs: {
-    USD: { symbol: '$',  multiplier: 1,    locale: 'en-US' },
-    INR: { symbol: '₹',  multiplier: 83.5, locale: 'en-IN' },
-    EUR: { symbol: '€',  multiplier: 0.92, locale: 'de-DE' },
+  baseTiers: {
+    starter: { basePrice: 29 },
+    professional: { basePrice: 79 },
+    enterprise: { basePrice: 189 },
   },
-
-  // Tier metadata (display info — NOT prices)
   tiers: [
     {
       id: 'starter',
@@ -68,25 +61,14 @@ export const PRICING_CONFIG = {
   ],
 };
 
-// Pure price calculation function
-// Returns formatted price string — no state involved
-export function computePrice(tierId, currency, billingCycle) {
-  const config = PRICING_CONFIG;
-  const base = config.basePrices[tierId];
-  const tariff = config.currencyTariffs[currency];
-  const cycleMultiplier = billingCycle === 'annual' ? config.annualMultiplier : 1;
-
-  const rawPrice = base * tariff.multiplier * cycleMultiplier;
-
-  // Round to nearest sensible value (rounded to nearest 10)
+export const computePrice = (tier, currency, isAnnual) => {
+  const base = PRICING_MATRIX.baseTiers[tier].basePrice;
+  const tariff = PRICING_MATRIX.tariffs[currency];
+  const multiplier = isAnnual ? PRICING_MATRIX.annualDiscount : 1;
+  const rawPrice = base * tariff.rate * multiplier;
   const rounded = Math.round(rawPrice / 10) * 10;
 
-  return new Intl.NumberFormat(tariff.locale, {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(rounded);
-}
+  return new Intl.NumberFormat(tariff.locale, { maximumFractionDigits: 0 }).format(rounded);
+};
 
-export function getCurrencySymbol(currency) {
-  return PRICING_CONFIG.currencyTariffs[currency].symbol;
-}
+export const getCurrencySymbol = (currency) => PRICING_MATRIX.tariffs[currency].symbol;
