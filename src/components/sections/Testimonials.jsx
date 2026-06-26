@@ -46,7 +46,7 @@ export function Testimonials() {
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
           {testimonials.map((test, index) => (
             <div 
               key={index} 
@@ -85,6 +85,14 @@ export function Testimonials() {
 
             </div>
           ))}
+        </div>
+
+        <div className="flex items-center justify-center gap-4">
+          <img src="/chevron-left.svg" alt="" aria-hidden="true" className="w-5 h-5 opacity-60" />
+          <span className="font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-slate-500">
+            Testimonials
+          </span>
+          <img src="/chevron-right.svg" alt="" aria-hidden="true" className="w-5 h-5 opacity-60" />
         </div>
 
       </div>

@@ -6,7 +6,8 @@ import CurrencySelector from '../ui/CurrencySelector';
 import PricingCard from '../ui/PricingCard';
 
 const Pricing = () => {
-  // Mutable refs for state variables to ensure zero re-render price updates
+  // Using useRef and direct DOM mutation to pass the zero-re-render constraint.
+  // React.memo keeps the pricing cards from updating when controls change.
   const billingRef = useRef('monthly');
   const currencyRef = useRef('INR');
 
@@ -37,7 +38,7 @@ const Pricing = () => {
       if (refs.amount) {
         refs.amount.style.animation = 'none';
         // Force reflow ONLY on this node
-        refs.amount.offsetHeight; 
+        void refs.amount.offsetHeight;
         refs.amount.style.animation = 'priceFlip 0.18s ease-out forwards';
         refs.amount.textContent = computePrice(tier.id, currency, billing);
       }

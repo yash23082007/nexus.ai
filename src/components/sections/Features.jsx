@@ -5,6 +5,36 @@ import { useBreakpoint } from '../../hooks/useBreakpoint';
 import BentoCard from '../ui/BentoCard';
 import AccordionItem from '../ui/AccordionItem';
 
+function BentoGrid({ features, onHover, onLeave, ...props }) {
+  return (
+    <div className="bento-grid" role="list" aria-label="Feature cards" {...props}>
+      {features.map((feature) => (
+        <BentoCard
+          key={feature.id}
+          feature={feature}
+          onHover={() => onHover(feature.id)}
+          onLeave={onLeave}
+        />
+      ))}
+    </div>
+  );
+}
+
+function AccordionList({ features, openIndex, onToggle, ...props }) {
+  return (
+    <div className="accordion-list" role="list" aria-label="Feature list" {...props}>
+      {features.map((feature) => (
+        <AccordionItem
+          key={feature.id}
+          feature={feature}
+          isOpen={openIndex === feature.id}
+          onToggle={() => onToggle(feature.id)}
+        />
+      ))}
+    </div>
+  );
+}
+
 const Features = () => {
   // Mobile accordion: which panel is open
   const [openAccordionIndex, setOpenAccordionIndex] = useState(null);
@@ -64,41 +94,21 @@ const Features = () => {
           </p>
         </header>
 
-        {/* DESKTOP: Bento Grid */}
-        {/* Hidden on mobile via CSS — keeps DOM for context lock */}
-        <div
-          className="bento-grid hidden md:grid"
-          role="list"
-          aria-label="Feature cards"
+        {/* Using a ref-backed hover lock keeps the desktop grid responsive without standard state churn. */}
+        <BentoGrid
+          features={FEATURES_DATA}
+          onHover={handleBentoHover}
+          onLeave={handleBentoLeave}
           aria-hidden={isMobile}
-        >
-          {FEATURES_DATA.map((feature) => (
-            <BentoCard
-              key={feature.id}
-              feature={feature}
-              onHover={() => handleBentoHover(feature.id)}
-              onLeave={handleBentoLeave}
-            />
-          ))}
-        </div>
+        />
 
-        {/* MOBILE: Accordion */}
-        {/* Hidden on desktop via CSS */}
-        <div
-          className="accordion-list flex flex-col gap-3 md:hidden bg-oceanic/40 border border-white/5 rounded-2xl overflow-hidden shadow-2xl"
-          role="list"
-          aria-label="Feature list"
+        {/* The accordion stays mounted on desktop so the context-lock transfer can open the last hovered panel on mobile. */}
+        <AccordionList
+          features={FEATURES_DATA}
+          openIndex={openAccordionIndex}
+          onToggle={handleAccordionToggle}
           aria-hidden={!isMobile}
-        >
-          {FEATURES_DATA.map((feature) => (
-            <AccordionItem
-              key={feature.id}
-              feature={feature}
-              isOpen={openAccordionIndex === feature.id}
-              onToggle={() => handleAccordionToggle(feature.id)}
-            />
-          ))}
-        </div>
+        />
 
       </div>
     </section>
