@@ -160,7 +160,7 @@ export function Hero() {
 
         {/* Visual Mockup Box */}
         <div className="lg:col-span-6 w-full flex items-center justify-center">
-          <div className="opacity-0 hero-mockup w-full max-w-[580px] bg-[#040914] border border-white/5 rounded-2xl shadow-[0_25px_50px_rgba(0,0,0,0.5)] overflow-hidden relative">
+          <div className="hero-mockup w-full max-w-[580px] bg-[#040914] border border-white/5 rounded-2xl shadow-[0_25px_50px_rgba(0,0,0,0.5)] overflow-hidden relative">
             
             {/* Mockup Top Window Chrome */}
             <div className="bg-[#030712]/50 border-b border-white/5 px-4 py-3.5 flex items-center justify-between">

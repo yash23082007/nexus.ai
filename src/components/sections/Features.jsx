@@ -7,7 +7,7 @@ import AccordionItem from '../ui/AccordionItem';
 
 function BentoGrid({ features, onHover, onLeave, ...props }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6" role="list" aria-label="Feature cards" {...props}>
+    <div className="bento-grid" role="list" aria-label="Feature cards" {...props}>
       {features.map((feature) => (
         <BentoCard
           key={feature.id}
