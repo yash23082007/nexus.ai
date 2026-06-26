@@ -5,6 +5,36 @@ import IconXMark from '../../assets/svgs/IconXMark';
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isLoginLoading, setIsLoginLoading] = useState(false);
+  const [isStartFreeLoading, setIsStartFreeLoading] = useState(false);
+
+  const handleLoginClick = (e) => {
+    e.preventDefault();
+    if (isLoginLoading) return;
+    setIsLoginLoading(true);
+    setTimeout(() => {
+      setIsLoginLoading(false);
+      setIsMenuOpen(false);
+      const target = document.getElementById('pricing');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 1000);
+  };
+
+  const handleStartFreeClick = (e) => {
+    e.preventDefault();
+    if (isStartFreeLoading) return;
+    setIsStartFreeLoading(true);
+    setTimeout(() => {
+      setIsStartFreeLoading(false);
+      setIsMenuOpen(false);
+      const target = document.getElementById('pricing');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 1000);
+  };
 
   // Monitor scroll height to add darker background
   useEffect(() => {
@@ -72,15 +102,32 @@ export function Navbar() {
  
         {/* CTA Button */}
         <div className="hidden md:flex items-center gap-4">
-          <a href="#pricing" className="text-sm font-semibold text-slate-300 hover:text-forsythia transition-colors duration-200">
-            Login
+          <a 
+            href="#pricing" 
+            onClick={handleLoginClick}
+            className="text-sm font-semibold text-slate-300 hover:text-forsythia transition-colors duration-200 flex items-center gap-1.5 min-w-[55px]"
+          >
+            {isLoginLoading && (
+              <svg className="animate-spin h-3.5 w-3.5 text-forsythia" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+              </svg>
+            )}
+            <span>{isLoginLoading ? 'Entering...' : 'Login'}</span>
           </a>
           <a 
             href="#pricing" 
             role="button"
-            className="btn bg-saffron-gradient text-oceanic text-sm font-bold px-5 py-2.5 rounded-full hover:shadow-[0_0_15px_rgba(255,200,1,0.3)] transition-transform duration-200 hover:-translate-y-0.5"
+            onClick={handleStartFreeClick}
+            className="btn bg-saffron-gradient text-oceanic text-sm font-bold px-5 py-2.5 rounded-full hover:shadow-[0_0_15px_rgba(255,200,1,0.3)] transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2 min-w-[110px]"
           >
-            Start Free
+            {isStartFreeLoading && (
+              <svg className="animate-spin h-3.5 w-3.5 text-oceanic" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+              </svg>
+            )}
+            <span>{isStartFreeLoading ? 'Loading...' : 'Start Free'}</span>
           </a>
         </div>
 
@@ -142,17 +189,29 @@ export function Navbar() {
           <div className="flex flex-col gap-4 mt-auto">
             <a 
               href="#pricing" 
-              onClick={() => setIsMenuOpen(false)}
-              className="btn w-full py-3 bg-white/5 border border-white/5 text-slate-300 rounded-xl text-center font-bold"
+              onClick={handleLoginClick}
+              className="btn w-full py-3 bg-white/5 border border-white/5 text-slate-300 rounded-xl text-center font-bold flex items-center justify-center gap-2"
             >
-              Login
+              {isLoginLoading && (
+                <svg className="animate-spin h-4 w-4 text-forsythia" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+              )}
+              <span>{isLoginLoading ? 'Entering...' : 'Login'}</span>
             </a>
             <a 
               href="#pricing" 
-              onClick={() => setIsMenuOpen(false)}
-              className="btn w-full py-3 bg-saffron-gradient text-oceanic rounded-xl text-center font-bold"
+              onClick={handleStartFreeClick}
+              className="btn w-full py-3 bg-saffron-gradient text-oceanic rounded-xl text-center font-bold flex items-center justify-center gap-2"
             >
-              Start Free
+              {isStartFreeLoading && (
+                <svg className="animate-spin h-4 w-4 text-oceanic" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+              )}
+              <span>{isStartFreeLoading ? 'Loading...' : 'Start Free'}</span>
             </a>
           </div>
         </div>

@@ -5,8 +5,22 @@ export function Hero() {
   const [latencyText, setLatencyText] = useState('12ms');
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [flowSpeed, setFlowSpeed] = useState('15s');
+  const [isGetStartedLoading, setIsGetStartedLoading] = useState(false);
   
   const alertTimeoutRef = useRef(null);
+
+  const handleGetStartedClick = (e) => {
+    e.preventDefault();
+    if (isGetStartedLoading) return;
+    setIsGetStartedLoading(true);
+    setTimeout(() => {
+      setIsGetStartedLoading(false);
+      const target = document.getElementById('pricing');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 1000);
+  };
 
   // WAAPI orchestrated entry sequence animations
   useEffect(() => {
@@ -158,8 +172,18 @@ export function Hero() {
           </p>
 
           <div className="opacity-0 hero-ctas flex flex-wrap items-center gap-4 mb-12">
-            <a href="#pricing" className="btn bg-saffron-gradient text-oceanic text-base font-bold px-8 py-3.5 rounded-xl hover:shadow-[0_0_25px_rgba(255,200,1,0.5)]">
-              Get Started Free
+            <a 
+              href="#pricing" 
+              onClick={handleGetStartedClick}
+              className="btn bg-saffron-gradient text-oceanic text-base font-bold px-8 py-3.5 rounded-xl hover:shadow-[0_0_25px_rgba(255,200,1,0.5)] transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2 min-w-[190px]"
+            >
+              {isGetStartedLoading && (
+                <svg className="animate-spin h-5 w-5 text-oceanic" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+              )}
+              <span>{isGetStartedLoading ? 'Loading...' : 'Get Started Free'}</span>
             </a>
             <button 
               onClick={() => handleNodeClick('ai')}

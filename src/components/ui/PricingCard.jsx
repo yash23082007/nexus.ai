@@ -1,17 +1,28 @@
 // src/components/ui/PricingCard.jsx
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { computePrice, getCurrencySymbol } from '../../utils/priceUtils';
 
 // React.memo = this component NEVER re-renders after mount
 const PricingCard = React.memo(({ tier, registerPriceRef, initialCurrency, initialBilling }) => {
   const symbolRef = useRef(null);
   const amountRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     // Register DOM refs with parent on mount
     registerPriceRef(tier.id, 'symbol', symbolRef.current);
     registerPriceRef(tier.id, 'amount', amountRef.current);
   }, [tier.id, registerPriceRef]);
+
+  const handleCtaClick = (e) => {
+    e.preventDefault();
+    if (isLoading) return;
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      alert(`Provisioning your ${tier.name} workspace on NEXUS.AI. Check your email to configure your credentials!`);
+    }, 1200);
+  };
 
   // Initial values — computed once on render, never again via React
   const initialSymbol = getCurrencySymbol(initialCurrency);
@@ -94,14 +105,21 @@ const PricingCard = React.memo(({ tier, registerPriceRef, initialCurrency, initi
         <a
           href={tier.id === 'enterprise' ? '#contact' : '#signup'}
           role="button"
+          onClick={handleCtaClick}
           aria-label={`${tier.cta} - ${tier.name} plan`}
-          className={`btn w-full text-center py-3 font-semibold rounded-xl text-sm transition-all duration-300 ${
+          className={`btn w-full py-3 font-semibold rounded-xl text-sm transition-all duration-300 flex items-center justify-center gap-2 ${
             tier.popular 
               ? 'bg-saffron-gradient text-oceanic hover:shadow-[0_0_20px_rgba(255,200,1,0.4)] hover:-translate-y-0.5' 
               : 'bg-white/5 text-slate-200 border border-white/5 hover:bg-white/10 hover:text-white hover:-translate-y-0.5'
           }`}
         >
-          {tier.cta}
+          {isLoading && (
+            <svg className={`animate-spin h-4 w-4 ${tier.popular ? 'text-oceanic' : 'text-forsythia'}`} fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            </svg>
+          )}
+          <span>{isLoading ? 'Processing...' : tier.cta}</span>
         </a>
       </div>
     </article>
