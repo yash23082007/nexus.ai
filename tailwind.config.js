@@ -27,6 +27,10 @@ export default {
         slideDown: { from: { maxHeight: 0, opacity: 0 }, to: { maxHeight: '600px', opacity: 1 } },
         priceFlip: { '0%': { opacity: 0, transform: 'translateY(-8px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
       },
+      backgroundImage: {
+        'saffron-gradient': 'linear-gradient(135deg, #FFC801 0%, #FF9932 100%)',
+        'dark-gradient': 'linear-gradient(135deg, #114C5A 0%, #172B36 100%)',
+      },
       screens: {
         sm: '640px', md: '768px', lg: '1024px', xl: '1280px', '2xl': '1536px',
       },

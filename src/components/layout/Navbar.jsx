@@ -54,31 +54,31 @@ export function Navbar() {
         {/* Desktop Navigation links */}
         <ul 
           role="list"
-          className="hidden md:flex items-center gap-8 text-sm font-sans font-medium text-slate-300"
+          className="hidden md:flex items-center gap-8 text-sm font-sans font-medium"
         >
           <li>
-            <a href="#features" className="hover:text-white transition-colors">Features</a>
+            <a href="#features" className="text-slate-300 hover:text-forsythia transition-colors duration-200">Features</a>
           </li>
           <li>
-            <a href="#metrics" className="hover:text-white transition-colors">Metrics</a>
+            <a href="#metrics" className="text-slate-300 hover:text-forsythia transition-colors duration-200">Metrics</a>
           </li>
           <li>
-            <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
+            <a href="#pricing" className="text-slate-300 hover:text-forsythia transition-colors duration-200">Pricing</a>
           </li>
           <li>
-            <a href="#testimonials" className="hover:text-white transition-colors">Testimonials</a>
+            <a href="#testimonials" className="text-slate-300 hover:text-forsythia transition-colors duration-200">Testimonials</a>
           </li>
         </ul>
-
+ 
         {/* CTA Button */}
         <div className="hidden md:flex items-center gap-4">
-          <a href="#pricing" className="text-sm font-semibold text-slate-400 hover:text-white transition-colors">
+          <a href="#pricing" className="text-sm font-semibold text-slate-300 hover:text-forsythia transition-colors duration-200">
             Login
           </a>
           <a 
             href="#pricing" 
             role="button"
-            className="btn bg-saffron-gradient text-oceanic text-sm font-bold px-5 py-2.5 rounded-full hover:shadow-[0_0_15px_rgba(255,200,1,0.3)]"
+            className="btn bg-saffron-gradient text-oceanic text-sm font-bold px-5 py-2.5 rounded-full hover:shadow-[0_0_15px_rgba(255,200,1,0.3)] transition-transform duration-200 hover:-translate-y-0.5"
           >
             Start Free
           </a>
@@ -108,32 +108,32 @@ export function Navbar() {
           id="mobile-menu-overlay"
           className="md:hidden fixed top-[72px] left-0 w-full h-[calc(100vh-72px)] bg-oceanic/95 backdrop-blur-xl z-40 flex flex-col justify-between p-8"
         >
-          <nav className="flex flex-col gap-6 text-2xl font-mono font-bold text-slate-200">
+          <nav className="flex flex-col gap-6 text-2xl font-mono font-bold">
             <a 
               href="#features" 
               onClick={() => setIsMenuOpen(false)}
-              className="hover:text-forsythia transition-colors"
+              className="text-slate-200 hover:text-forsythia transition-colors duration-200"
             >
               Features
             </a>
             <a 
               href="#metrics" 
               onClick={() => setIsMenuOpen(false)}
-              className="hover:text-forsythia transition-colors"
+              className="text-slate-200 hover:text-forsythia transition-colors duration-200"
             >
               Metrics
             </a>
             <a 
               href="#pricing" 
               onClick={() => setIsMenuOpen(false)}
-              className="hover:text-forsythia transition-colors"
+              className="text-slate-200 hover:text-forsythia transition-colors duration-200"
             >
               Pricing
             </a>
             <a 
               href="#testimonials" 
               onClick={() => setIsMenuOpen(false)}
-              className="hover:text-forsythia transition-colors"
+              className="text-slate-200 hover:text-forsythia transition-colors duration-200"
             >
               Testimonials
             </a>
